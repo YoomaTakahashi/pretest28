@@ -2,13 +2,13 @@
     <v-container>
         <v-row justify="center">
             <v-col cols="12" md="12">
-                <v-card color="#404040">
+                <v-card class="rounded" elevation="5" color="#404040">
                     <v-card-title>
                         <h1 class="text-center">แก้ไขข้อมูลส่วนตัว</h1>
                     </v-card-title>
                     <v-card-text class="bg-white">
                         <br>
-                        <v-form @submit.prevent="saveMember">
+                        <v-form  @submit.prevent="saveMember">
                             <v-row>
                                 <v-col cols="12" md="6">
                                     <v-text-field variant="solo-filled" label="ชื่อ" v-model="form.fname" :error-messages="error.fname"></v-text-field>
@@ -123,5 +123,7 @@ onMounted(fecth)
 </script>
 
 <style scoped>
-
+.rounded{
+    border-radius: 24px !important;
+}
 </style>

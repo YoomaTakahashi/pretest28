@@ -4,14 +4,15 @@
             <v-col cols="12">
                 <v-form v-if="user.status_eva === 2 || user.status_eva === 3">
                     <h1 class="font-weight-bold">ผลการประเมินของผู้รับการประเมินผล</h1>
-                    <v-card elevation="5" rounded class="pa-4">
+                    <v-card elevation="5" rounded class="pa-4 rounded2">
                         <p>ผู้ใช้งาน : {{ user.fname }} {{ user.lname }}</p>
                         <p>รอบการประเมินที่ : {{ user.round_sys }} ปี {{ user.year_sys }}</p>
                     </v-card>
                     <v-row v-for="(topic,t) in topics" :key="topic.id_topic">
                         <v-col cols="12">
                             <h1 class="font-weight bold">{{ t+1 }}.{{ topic.name_topic }}</h1>
-                            <v-table class="table">
+                            <v-card elevation="5" class="rounded">
+                                <v-table class="table">
                                 <tr>
                                     <th class="bg-grey border pa-2" style="width: 10%;">ตัวชี้วัด</th>
                                     <th class="bg-grey border pa-2" style="width: 10%;">รายละเอียดตัวชี้วัด</th>
@@ -31,6 +32,7 @@
                                     <td class="border pa-2 text-center" style="width: 10%;">{{ indicate.score_member*indicate.point_indicate }}</td>   
                                 </tr>
                             </v-table>
+                            </v-card>
                         </v-col>
                     </v-row>
                     <div class="mt-4 text-end">
@@ -86,5 +88,8 @@ onMounted(async()=>{
 <style scoped>
 .rounded{
     border-radius: 24px !important;
+}
+.rounded{
+    border-radius: 10px !important;
 }
 </style>
