@@ -35,17 +35,7 @@ app.use('/api/Eva/score_member',score_member)
 const score_commit = require('./routes/Eva/score_commit')
 app.use('/api/Eva/score_commit',score_commit)
 
-const table = require('./routes/Eva/table')
-app.use('/api/Eva/table',table)
-
-const edit_eva = require('./routes/Eva/edit_eva')
-app.use('/api/Eva/edit_eva',edit_eva)
-
-
-//----------------------------------------------------------------- staff api ----------------------------------------------------------------------------------
-
-const commit = require('./routes/Staff/commit')
-app.use('/api/Staff/commit',commit)
+//----------------------------------------------------------------- staff api --------------------------------------------------------------
 
 const doc = require('./routes/Staff/doc')
 app.use('/api/Staff/doc',doc)
