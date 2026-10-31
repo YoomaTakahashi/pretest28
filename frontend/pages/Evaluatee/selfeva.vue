@@ -4,14 +4,14 @@
             <v-col cols="12">
                 <v-form v-if="user.status_eva === 1" @submit.prevent="saveScore">
                     <h1 class="font-weight-bold">แบบประเมินตนเอง</h1>
-                    <v-card elevation="5" rounded class="pa-4">
+                    <v-card elevation="5" rounded class="pa-4 rounded2">
                         <p>ผู้ใช้งาน : {{ user.fname }} {{ user.lname }}</p>
                         <p>รอบการประเมินที่ : {{ user.round_sys }} ปี {{ user.year_sys }}</p>
                     </v-card>
                     <v-row v-for="(topic,t) in topics" :key="topic.id_topic">
                         <v-col cols="12">
                             <h1 class="font-weight bold">{{ t+1 }}.{{ topic.name_topic }}</h1>
-                            <v-card elevation="5" rounded class="pa-5">
+                            <v-card elevation="5" rounded class="pa-5 rounded">
                                 <v-row v-for="(indicate,i) in topic.indicates" :key="indicate.id_indicate">
                                     <v-col cols="12">
                                         {{ t+1 }}.{{ i+1 }}.{{ indicate.name_indicate }} รายละเอียดตัวชี้วัด :{{ indicate.detail_indicate }} น้ำหนักคะแนน : {{ indicate.point_indicate }} คะแนนเต็ม : {{ indicate.point_indicate*4 }}
@@ -106,5 +106,10 @@ const saveScore = async()=>{
 </script>
 
 <style scoped>
-
+.rounded{
+    border-radius: 24px !important;
+}
+.rounded2{
+    border-radius: 10px !important;
+}
 </style>

@@ -5,6 +5,10 @@ const fs = require('fs')
 const db = require('../../db')
 const {verifyToken,requireRole} = require('../../middleware/authmiddleware')
 const router = express.Router()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3b91724671aa942ba4de3780cf7378c09e81698c
 
 router.post('/save',verifyToken,requireRole('ฝ่ายบุคลากร'),async(req,res)=>{
 
