@@ -128,7 +128,7 @@ function validateForm(){
 const token = import.meta.client ? localStorage.getItem('token'):null
 const saveMember = async()=>{
 
-    if(validateForm())return
+    if(!validateForm())return
     const f = form.value
     const payload = {
         fname:f.fname,
@@ -167,7 +167,7 @@ const edit = (items:any)=>{
 }
 
 const del = async(id_member:number)=>{
-    if(!validateForm())return
+    if(!confirm('ต้องการลบข้อมุลชุดนี้ใช่หรือไม่'))return
     try {
         await axios.delete(`${staff}/member/delete/${id_member}`,{headers:{Authorization:`Bearer ${token}`}})
         await reset()
