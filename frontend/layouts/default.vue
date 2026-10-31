@@ -96,7 +96,7 @@ const fecth = async()=>{
         console.error('Error get profile',error)
     }
 }
-onMounted(fetch)
+onMounted(fecth)
 const bg = (role:string) =>{
     if(role === 'ฝ่ายบุคลากร')return '#647687'
     if(role === 'กรรมการประเมิน')return '#007FFF'
