@@ -45,7 +45,7 @@
                                 </v-col>
                             </v-row>
                         </v-form>
-                        <nuxt-link to="/" class="text-center text-blue text-decoration-blue">หากมีบัญชีอยู่แล้ว? เข้าสู่ระบบ</nuxt-link>
+                        <nuxt-link to="/" class="text-center text-blue text-decoration-blue"><p>หากมีบัญชีอยู่แล้ว? เข้าสู่ระบบ</p></nuxt-link>
                     </v-card-text>
                 </v-card>
             </v-col>
