@@ -33,6 +33,12 @@ app.use('/api/Eva/score_commit',score_commit)
 const show_eva = require('./routes/Commit/show_eva')
 app.use('/api/Commit/show_eva',show_eva)
 
+const save_score = require('./routes/Commit/save_score')
+app.use('/api/Commit/save_score',save_score)
+
+const score_member2 = require('./routes/Commit/score_member')
+app.use('/api/Commit/score_member',score_member2)
+
 app.use((req,res)=> res.status(404).json({message:"Route Not found"}))
 app.listen(3001,()=>{
 
