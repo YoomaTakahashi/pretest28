@@ -41,8 +41,8 @@
                                 <tr v-for="(items,index) in result" :key="items.id_doc">
                                     <td class="border text-center">{{ index+1 }}</td>
                                     <td class="border text-center">{{ items.name_doc }}</td>
-                                    <td class="border text-center">{{ formatDate(items.day_eva) }}</td>
-                                    <td class="border text-center"><v-btn class="text-center text-white" color="info" @click="view(items.file)" prepend-icon="mdi-eye">เปิดดู</v-btn></td>
+                                    <td class="border text-center">{{ formatDate(items.day_doc) }}</td>
+                                    <td class="border text-center"><v-btn class="text-center text-white" color="info" size="small" @click="view(items.file)" prepend-icon="mdi-eye">เปิดดู</v-btn></td>
                                     <td class="border text-center">
                                         <center>
                                             <v-btn class="text-center text-white ma-2" color="error" @click="del(items.id_doc)" size="small">ลบ</v-btn>
@@ -125,7 +125,7 @@ const result = computed(()=>{
 
     return dataResult.value.filter((item:any)=>{
         return(
-            item.name_doc.toLowerCase().include(s)
+            item.name_doc.toLowerCase().includes(s)
         )
     })
 })

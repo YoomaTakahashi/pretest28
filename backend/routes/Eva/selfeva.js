@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const uploadDir = path.join(__dirname,'../../uploads/file_eva')
 const db = require('../../db')
 const router = express.Router()
-const {verifyToken,requireRole} = require('../../middleware/authmidleware')
+const {verifyToken,requireRole} = require('../../middleware/authmiddleware')
 
 router.get('/user',verifyToken,requireRole('ผู้รับการประเมินผล'),async (req,res) => {
     try {

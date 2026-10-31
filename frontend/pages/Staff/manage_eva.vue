@@ -184,7 +184,7 @@ const result = computed(()=>{
 
     return dataResult.value.filter((item:any)=>{
         return(
-            item.username.toLowerCase().include(s)
+            item.username.toLowerCase().includes(s)
         )
     })
 })

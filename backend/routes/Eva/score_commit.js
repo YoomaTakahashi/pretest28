@@ -1,7 +1,7 @@
 const express = require('express')
 const db = require('../../db')
 const router = express.Router()
-const {verifyToken,requireRole} = require('../../middleware/authmidleware')
+const {verifyToken,requireRole} = require('../../middleware/authmiddleware')
 
 router.get('/commit',verifyToken,requireRole('ผู้รับการประเมินผล'),async (req,res) => {
     try {

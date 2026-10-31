@@ -4,6 +4,7 @@ const db = require('../../db')
 const {verifyToken,requireRole} = require('../../middleware/authmiddleware')
 const router = express.Router()
 
+//เพิ่มหัวข้อการประเมิน
 router.post('/save',verifyToken,requireRole('ฝ่ายบุคลากร'),async(req,res)=>{
 
     try {
@@ -17,6 +18,7 @@ router.post('/save',verifyToken,requireRole('ฝ่ายบุคลากร')
 
 })
 
+//แก้ไขหัวข้อการประเมิน
 router.put('/update/:id_topic',verifyToken,requireRole('ฝ่ายบุคลากร'),async(req,res)=>{
 
     try {
@@ -32,6 +34,7 @@ router.put('/update/:id_topic',verifyToken,requireRole('ฝ่ายบุคล
 
 })
 
+//ลบหัวข้อการประเมิน
 router.delete('/delete/:id_topic',verifyToken,requireRole('ฝ่ายบุคลากร'),async(req,res)=>{
 
     try {
@@ -46,7 +49,7 @@ router.delete('/delete/:id_topic',verifyToken,requireRole('ฝ่ายบุค
 
 })
 
-
+//แสดงหัวข้อการประเมิน
 router.get('/show',verifyToken,requireRole('ฝ่ายบุคลากร'),async(req,res)=>{
 
     try {

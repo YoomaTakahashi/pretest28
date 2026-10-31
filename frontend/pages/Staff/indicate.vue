@@ -109,8 +109,8 @@ function validateForm(){
 
     if(!f.id_topic)error.value.id_topic = 'กรุณาเลือกหัวข้อการประเมิน'
     if(!f.name_indicate.trim())error.value.name_indicate = 'กรุณากรอกชื่อตัวชี้วัด'
-    if(!f.point_indicate.trim())error.value.point_indicate = 'กรุณาเลือกน้ำหนักคะแนน'
-    if(!f.check_indicate.trim())error.value.check_indicate = 'กรุณาเลือกประเภทสมาชิก'
+    if(!f.point_indicate)error.value.point_indicate = 'กรุณาเลือกน้ำหนักคะแนน'
+    if(!f.check_indicate)error.value.check_indicate = 'กรุณาเลือกประเภทสมาชิก'
 
     return Object.keys(error.value).length === 0
 }
@@ -148,10 +148,10 @@ const edit = (items:any)=>{
     form.value = {...items}
 }
 
-const del = async(id_topic:number)=>{
+const del = async(id_indicate:number)=>{
     if(!confirm('ต้องการลบข้อมุลชุดนี้ใช่หรือไม่'))return
     try {
-        await axios.delete(`${staff}/topic/delete/${id_topic}`,{headers:{Authorization:`Bearer ${token}`}})
+        await axios.delete(`${staff}/indicate/delete/${id_indicate}`,{headers:{Authorization:`Bearer ${token}`}})
         await reset()
         await fetch()
     } catch (error) {
@@ -166,7 +166,7 @@ const result = computed(()=>{
 
     return dataResult.value.filter((item:any)=>{
         return(
-            item.name_indicate.toLowerCase().include(s)
+            item.name_indicate.toLowerCase().includes(s)
         )
     })
 })

@@ -11,7 +11,7 @@ router.post('/save/:id_eva',verifyToken,requireRole('ฝ่ายบุคลา
         await db.query(`delete from tb_commit where id_eva = ?`,[id_eva])
         const m = req.body
         const v = m.map(p=>[id_eva,p.id_member,'n',p.role])
-        const [rows] = await db.query(`insert into tb_commit(id_eva,id_member,status_commit,level_commit) values ?`,[id_eva,id_member,status_commit,level_commit])
+        const [rows] = await db.query(`insert into tb_commit(id_eva,id_member,status_commit,level_commit) values ?`,[v])
         res.json(rows,{message:'save'})
     } catch (error) {
         console.error("error save",error)
@@ -54,7 +54,7 @@ router.get('/header/:id_eva',verifyToken,requireRole('ฝ่ายบุคล�
     try {
         const {id_eva} = req.params
         const [rows] = await db.query(`select * from tb_eva e,tb_system s,tb_member m where e.id_eva = ? and e.id_member = m.id_member and e.id_sys = s.id_sys order by id_eva desc`,[id_eva])
-        res.json(rows,{message:'get'})
+        res.json(rows[0],{message:'get'})
         
     } catch (error) {
         console.error("error get",error)

@@ -132,7 +132,7 @@ const result = computed(()=>{
 
     return dataResult.value.filter((item:any)=>{
         return(
-            item.name_topic.toLowerCase().include(s)
+            item.name_topic.toLowerCase().includes(s)
         )
     })
 })

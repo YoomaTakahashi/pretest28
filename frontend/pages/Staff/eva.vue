@@ -4,7 +4,7 @@
             <v-col cols="12" md="12">
                 <v-card>
                     <v-card-title>
-                        <h1 class="text-center">จัดการรอบการประเมิน</h1>
+                        <h1 class="text-center">จัดการแบบประเมิน</h1>
                     </v-card-title>
                     <v-card-text>
                         <br>
@@ -14,7 +14,7 @@
                                     <v-select label="ผู้รับการประเมินผล" v-model="form.id_member" :error-messages="error.id_member" :items="eva.map((t)=>({title:`${t.fname} ${t.lname}`,value:t.id_member}))"></v-select>
                                 </v-col>
                                 <v-col cols="12" md="6">
-                                    <v-select label="รอบการประเมิน" v-model="form.id_sys" :error-messages="error.id_sys" :items="round.map((t)=>({title:`รอบการประเมินที่:${t.round_sys} ปี:${t.year}`,value:t.id_sys}))"></v-select>
+                                    <v-select label="รอบการประเมิน" v-model="form.id_sys" :error-messages="error.id_sys" :items="round.map((t)=>({title:`รอบการประเมินที่:${t.round_sys} ปี:${t.year_sys}`,value:t.id_sys}))"></v-select>
                                 </v-col>
                                 <v-col cols="12" md="12">
                                     <v-text-field label="วันที่ออกแบบประเมิน" v-model="form.day_eva" :error-messages="error.day_eva" type="date"></v-text-field>
@@ -46,8 +46,9 @@
                                     <td class="border text-center">{{ index+1 }}</td>
                                     <td class="border text-center">{{ items.fname }} {{ items.lname }}</td>
                                     <td class="border text-center">รอบการประเมินที่:{{ items.round_sys }} ปี:{{ items.year_sys }}</td>
-                                    <td class="border text-center"><v-btn class="text-center text-white" color="success" @click="go(items.id_eva)">เพิ่มกรรมการ</v-btn></td>
                                     <td class="border text-center">{{ formatDate(items.day_eva) }}</td>
+                                    <td class="border text-center"><v-btn class="text-center text-white" color="success" size="small" @click="go(items.id_eva)">เพิ่มกรรมการ</v-btn></td>
+                                    
                                     <td class="border text-center">
                                         <center>
                                             <v-btn class="text-center text-white ma-2" color="warning" @click="edit(items)" size="small">แก้ไข</v-btn>
@@ -108,7 +109,7 @@ const saveMember = async()=>{
     if(!validateForm())return
     const f = form.value
     try {
-        f.id_sys
+        f.id_eva
         ?await axios.put(`${staff}/eva/update/${f.id_eva}`,f,{headers:{Authorization:`Bearer ${token}`}})
         :await axios.post(`${staff}/eva/save`,f,{headers:{Authorization:`Bearer ${token}`}})
         await fetch()
@@ -156,7 +157,7 @@ const result = computed(()=>{
 
     return dataResult.value.filter((item:any)=>{
         return(
-            item.name_indicate.toLowerCase().include(s)
+            item.name_indicate.toLowerCase().includes(s)
         )
     })
 })
