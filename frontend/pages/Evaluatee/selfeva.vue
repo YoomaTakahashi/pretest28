@@ -16,7 +16,8 @@
                                     <v-col cols="12">
                                         {{ t+1 }}.{{ i+1 }}.{{ indicate.name_indicate }} รายละเอียดตัวชี้วัด :{{ indicate.detail_indicate }} น้ำหนักคะแนน : {{ indicate.point_indicate }} คะแนนเต็ม : {{ indicate.point_indicate*4 }}
                                         <v-textarea label="คำอธิบายเพิ่มเติม(ถ้ามี)" rows="2" variant="solo-filled" v-model="indicate.detail_eva" ></v-textarea>
-                                        <v-file-input label="*** รองรับเฉพาะนามสกุลไฟล์ .png .pdf .jpg *** " v-model="indicate.file_eva" variant="solo-filled" ></v-file-input>
+                                        <v-file-input label="*** รองรับเฉพาะนามสกุลไฟล์ .png .pdf .jpg *** " v-model="indicate.file_eva" variant="solo-filled" @change="onFilechange($event,topic.id_topic,indicate.id_indicate)" accept=".png,.jpg,.pdf"></v-file-input>
+                                        <v-select label="ใส่คะแนน1-4" v-model="indicate.score" variant="solo-filled" ></v-select>
                                     </v-col>
                                 </v-row>
                             </v-card>
