@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-// const express = require('express')
-// const path = require('path')
-// const jwt = require('jsonwebtoken')
-// const uploadDir = path.join(__dirname,'../uploads')
-// const JWT_SECRET = process.env.JWT_SECRET
-// const bc = require('bcrypt')
-// const db  
-=======
 const express = require('express')
 const path = require('path')
 const jwt = require('jsonwebtoken')
@@ -57,4 +48,6 @@ router.post('/login',async(req,res)=>{
     }
 
 })
->>>>>>> aa4644b807a2f0b2e0966e18af0a1f55582e60fa
+
+module.exports = router
+

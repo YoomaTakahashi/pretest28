@@ -33,7 +33,7 @@
                                 <v-col cols="12" md="12">
                                     <center>
                                         <v-btn class="text-center ma-2" color="primary" type="submit">{{ form.id_member ? 'อัปเดต':'บันทึก' }}</v-btn>
-                                        <v-btn class="text-center ma-2" color="error" type="reset">ยกเลิก</v-btn>
+                                        <v-btn class="text-center ma-2" color="error" @click="reset()">ยกเลิก</v-btn>
                                     </center>
                                 </v-col>
                             </v-row>
@@ -63,7 +63,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-red text-center"></td>
+                                    <td class="text-red text-center" colspan="12" v-if="result.length === 0">ไม่พบข้อมูล</td>
                                 </tr>
                             </tbody>
                         </v-table>
@@ -75,14 +75,14 @@
 </template>
 <script setup lang="ts">
 import axios from 'axios'
-import { api } from '~/API/base'
+import { api, staff } from '~/API/base'
 
 
 const error = ref<Record<string,string>>({})
-const pic_user = ref<File | null>(null)
-const typeR = ['ฝ่ายบุคลากร','ผู้รับการประเมินผล','กรรมการประเมิน']
-const conP = ref('')
+const typeR = ['ผู้รับการประเมินผล']
+const dataResult = ref([])
 const show = ref(false)
+const search = ref('')
 const showPw = ref(false)
 const form = ref({
     id_member:null,
@@ -93,6 +93,17 @@ const form = ref({
     password:'',
     role:''
 })
+const reset = ()=>{
+    form.value = {
+        id_member:null,
+        fname:'',
+        lname:'',
+        email:'',
+        username:'',
+        password:'',
+        role:''
+    }
+}
 const emailRegex = /^[^\s]+@[^\s]+\.[^\s]{2,}$/i
 
 function validateForm(){
@@ -109,31 +120,74 @@ function validateForm(){
     if(!f.password.trim())error.value.password = 'กรุณากรอกชื่อผู้ใช้งาน'
     else if(f.password.trim().length < 6)error.value.password = 'รหัสผ่านต้องยาวอย่างน้อย 6 ตัวอักษร'
 
-    if(!conP.value.trim())error.value.conP = 'โปรดยืนยันรหัสผ่าน'
-    else if(conP.value.trim() !== f.password.trim())error.value.conP = 'รหัสผ่านไม่ตรงกัน'
 
     if(!f.role.trim())error.value.role = 'กรุณาเลือกประเภทสมาชิก'
 
     return Object.keys(error.value).length === 0
 }
-
+const token = import.meta.client ? localStorage.getItem('token'):null
 const saveMember = async()=>{
 
     if(validateForm())return
-    const formdata = new FormData
-    formdata.append('form',JSON.stringify(form.value))
-    formdata.append('pic_user',pic_user.value!)
+    const f = form.value
+    const payload = {
+        fname:f.fname,
+        lname:f.lname,
+        email:f.email,
+        username:f.username,
+        password:f.password,
+        role:f.role,
+        ...(f.password ? {password:f.password}:null)
+    }
     try {
-        
-        await axios.post(`${api}/auth/regis`,formdata)
+        f.id_member
+        ?await axios.put(`${staff}/member/update/${f.id_member}`,payload,{headers:{Authorization:`Bearer ${token}`}})
+        :await axios.post(`${staff}/member/save`,{...payload,password:f.password},{headers:{Authorization:`Bearer ${token}`}})
+        await fetch()
+        await reset()
         alert('ทำรายการสำเร็จ')
-        navigateTo('/',{replace:true})
     } catch (error) {
-        console.error("error regis",error);
+        console.error("error save",error);
         
     }
 
 }
+
+const fetch = async()=>{
+    try {
+        const res = await axios.get(`${staff}/member/showE`,{headers:{Authorization:`Bearer ${token}`}})
+        dataResult.value = res.data
+    } catch (error) {
+        console.error("Error get",error);
+    }
+}
+
+const edit = (items:any)=>{
+    form.value = {...items}
+}
+
+const del = async(id_member:number)=>{
+    if(!validateForm())return
+    try {
+        await axios.delete(`${staff}/member/delete/${id_member}`,{headers:{Authorization:`Bearer ${token}`}})
+        await reset()
+        await fetch()
+    } catch (error) {
+        console.error("Error delete",error);
+        
+    }
+}
+
+const result = computed(()=>{
+    if(!search.value)return dataResult.value
+    const s = search.value.toLowerCase()
+
+    return dataResult.value.filter((item:any)=>{
+        return(
+            item.username.toLowerCase().include(s)
+        )
+    })
+})
 
 </script>
 
