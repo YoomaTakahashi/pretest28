@@ -4,25 +4,20 @@ const db = require('../../db')
 const {verifyToken,requireRole} = require('../../middleware/authmiddleware')
 const router = express.Router()
 
-router.post('/regis',async(req,res)=>{
+router.post('/save',verifyToken,requireRole('ฝ่ายบุคลากร'),async(req,res)=>{
 
     try {
-        
-        const pic_user = req.files.pic_user
-        const form = JSON.parse(req.body.form)
-        let filename = null
-        if(pic_user){
-            filename = Date.now() + path.extname(pic_user.name)
-            await pic_user.mv(path.join(uploadDir,filename))
-        }
-        const hash = await bc.hash(form.password,10)
-        const [rows] = await db.query(`insert into tb_member(fname,lname,email,username,password,role,pic_user) values(?,?,?,?,?,?,?)`,[form.fname,form.lname,form.email,form.username,hash,form.role,filename])
-        res.json(rows,{message:'regis'})
+        const {fname,lname,email,username,password,role} = req.body
+        const hash = await bc.hash(password,10)
+        const [rows] = await db.query(`insert into tb_member(fname,lname,email,username,password,role) values(?,?,?,?,?,?)`,[fname,lname,email,username,hash,role])
+        res.json(rows,{message:'save'})
     } catch (error) {
-        console.error("error regis",error)
-        res.status(500).json({message:"error regis"})
+        console.error("error save",error)
+        res.status(500).json({message:"error save"})
     }
 
 })
+
+
 
 module.exports = router
