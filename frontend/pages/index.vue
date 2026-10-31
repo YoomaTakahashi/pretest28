@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row justify="center">
-            <v-col cols="12" md="12">
+            <v-col cols="12" md="8">
                 <v-card color="#7d0c14">
                     <v-card-title>
                         <center><v-img src="/img/logo.png" width="15%" class="mt-4"></v-img></center>
@@ -33,7 +33,7 @@
                                 </v-col>
                             </v-row>
                         </v-form>
-                        <nuxt-link to="/regis" class="text-center text-blue text-decoration-blue">หากไม่มีบัญชีอยู่? สมัครสมาชิก</nuxt-link>
+                        <nuxt-link to="/regis" class="text-center text-blue text-decoration-blue"><p>หากไม่มีบัญชีอยู่? สมัครสมาชิก</p></nuxt-link>
                     </v-card-text>
                 </v-card>
             </v-col>
