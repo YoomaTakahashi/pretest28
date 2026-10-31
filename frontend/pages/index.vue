@@ -46,6 +46,9 @@ import axios from 'axios'
 import auth from '~/API/auth'
 import { api } from '~/API/base'
 
+definePageMeta({
+    layout:false
+})
 
 const error = ref('')
 const pic_user = ref<File | null>(null)

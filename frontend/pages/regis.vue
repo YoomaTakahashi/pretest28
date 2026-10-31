@@ -57,6 +57,9 @@
 import axios from 'axios'
 import { api } from '~/API/base'
 
+definePageMeta({
+    layout:false
+})
 
 const error = ref<Record<string,string>>({})
 const pic_user = ref<File | null>(null)

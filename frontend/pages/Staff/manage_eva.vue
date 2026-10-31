@@ -189,6 +189,8 @@ const result = computed(()=>{
     })
 })
 
+onMounted(fetch)
+
 </script>
 
 <style scoped>
