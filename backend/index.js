@@ -19,6 +19,16 @@ app.use('/api/auth',auth)
 const profile = require('./routes/profile')
 app.use('/api/profile',profile)
 
+//----------------------------------------------------------------- eva api -----------------------------------------------------------------------
+const selfeva = require('./routes/Eva/selfeva')
+app.use('/api/Eva/selfeva',selfeva)
+
+const score_member = require('./routes/Eva/score_member')
+app.use('/api/Eva/score_member',score_member)
+
+const score_commit = require('./routes/Eva/score_commit')
+app.use('/api/Eva/score_commit',score_commit)
+
 app.use((req,res)=> res.status(404).json({message:"Route Not found"}))
 app.listen(3001,()=>{
 
