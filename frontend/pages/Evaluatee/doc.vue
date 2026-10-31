@@ -22,6 +22,7 @@
                                     <td class="border text-center">{{ items.name_doc }}</td>
                                     <td class="border text-center">{{ formatDate(items.day_eva) }}</td>
                                     <td class="border text-center"><v-btn class="text-center text-white" color="info" @click="view(items.file)" prepend-icon="mdi-eye">เปิดดู</v-btn></td>
+                                    
                                 </tr>
                                 <tr>
                                     <td class="text-red text-center" colspan="12" v-if="result.length === 0">ไม่พบข้อมูล</td>
@@ -56,11 +57,11 @@ const fetch = async()=>{
     try {
         const res = await axios.get(`${api}/docnoe/show`,{headers:{Authorization:`Bearer ${token}`}})
         dataResult.value = res.data
-        console.log(res)
     } catch (error) {
         console.error("Error get",error);
     }
 }
+
 
 
 const result = computed(()=>{
@@ -69,7 +70,7 @@ const result = computed(()=>{
 
     return dataResult.value.filter((item:any)=>{
         return(
-            item.name_doc.toLowerCase().include(s)
+            item.name_doc.toLowerCase().includes(s)
         )
     })
 })

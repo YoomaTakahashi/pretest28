@@ -4,11 +4,11 @@ const router = express.Router()
 
 router.get('/show',async (req,res) => {
     try {
-        const [rows] = await db.query(`select * from tb_doc where id_eva `)
+        const [rows] = await db.query(`select * from tb_doc order by id_doc desc`)
         res.json(rows)
     } catch (error) {
         console.error('Error Get ',error)
-        res.json(500).json({message:'Error get'})
+        res.status(500).json({message:'Error get'})
     }
 })
 

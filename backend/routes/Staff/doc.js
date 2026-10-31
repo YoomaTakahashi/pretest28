@@ -5,7 +5,7 @@ const fs = require('fs')
 const db = require('../../db')
 const {verifyToken,requireRole} = require('../../middleware/authmidleware')
 const router = express.Router()
-const {verifyToken,requireRole} = require('../../middleware/authmidleware')
+
 
 router.post('/save',verifyToken,requireRole('ฝ่ายบุคลากร'),async(req,res)=>{
 
