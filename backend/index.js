@@ -19,6 +19,12 @@ app.use('/api/auth',auth)
 const profile = require('./routes/profile')
 app.use('/api/profile',profile)
 
+const docnoe = require('./routes/docnoe')
+app.use('/api/docnoe',docnoe)
+
+const dash = require('./routes/dash')
+app.use('/api/dash',dash)
+
 //----------------------------------------------------------------- eva api -----------------------------------------------------------------------
 const selfeva = require('./routes/Eva/selfeva')
 app.use('/api/Eva/selfeva',selfeva)
