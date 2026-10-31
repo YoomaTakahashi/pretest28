@@ -1,7 +1,7 @@
 const express = require('express')
 const bc = require('bcrypt')
 const db = require('../../db')
-const {verifyToken,requireRole} = require('../../middleware/authmiddleware')
+const {verifyToken,requireRole} = require('../../middleware/authmidleware')
 const router = express.Router()
 
 router.post('/save/:id_eva',verifyToken,requireRole('ฝ่ายบุคลากร'),async(req,res)=>{
